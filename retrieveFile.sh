@@ -19,3 +19,10 @@
 
 set -o nounset                                  # Treat unset variables as an error
 
+year=$1
+
+
+`wget -r http://icarus.cs.weber.edu/~hvalle/cs3030/MOCK_DATA_$year.tar.gz`
+
+
+exit 0

@@ -5,7 +5,7 @@
 #
 #         USAGE: ./compressFile.sh
 #
-#   DESCRIPTION: 
+#   DESCRIPTION: Zip file back up
 #
 #       OPTIONS: ---
 #  REQUIREMENTS: ---
@@ -18,4 +18,20 @@
 #===============================================================================
 
 set -o nounset                                  # Treat unset variables as an error
+
+#compress final filter data file
+
+#fileName being passed in
+fileName=$1
+
+#timestamp (YYYY-MM-DD-HH)
+timestamp=`date +%Y-%m-%d-%h`
+
+#curMonth (MM)
+curMonth=`date +m%`
+# zip <zippedFileName> <fileBeingZipped>
+
+echo "PROGRAM: 4" >> log
+
+zip TEAM_DATA_FILTER_$timestamp:$curMonth.zip $fileName &>> log
 

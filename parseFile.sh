@@ -19,6 +19,7 @@
 
 set -o nounset                                  # Treat unset variables as an error
 
+echo >> log
 echo "PROGRAM 3:" >> log
 
 #replace empty email fields with null

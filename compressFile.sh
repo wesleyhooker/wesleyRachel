@@ -25,13 +25,11 @@ set -o nounset                                  # Treat unset variables as an er
 fileName=$1
 
 #timestamp (YYYY-MM-DD-HH)
-timestamp=`date +%Y-%m-%d-%h`
+timestamp=`date +%Y-%m-%d:%M`
 
-#curMonth (MM)
-curMonth=`date +m%`
 # zip <zippedFileName> <fileBeingZipped>
 
 echo "PROGRAM: 4" >> log
 
-zip TEAM_DATA_FILTER_$timestamp:$curMonth.zip $fileName &>> log
+`zip wesleyRachel_DATA_FILTER_$timestamp.zip $fileName &>> log`
 

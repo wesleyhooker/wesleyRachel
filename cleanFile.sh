@@ -22,14 +22,9 @@ set -o nounset                                  # Treat unset variables as an er
 echo "PROGRAM 6:" >>log
 
 echo "Cleaning temporary files">>log
-#move into temp directory
-#remove all files
-cd tmp/
-rm *
-#cd out of the directory 
-#remove directory
-cd ..
-rmdir tmp/
+
+`rm -r temp/ &>>log`
+
 echo "Directory & files removed" &>>log
 
 #Log activity

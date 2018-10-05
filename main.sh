@@ -17,77 +17,126 @@
 #      REVISION:  ---
 #===============================================================================
 
-set -o nounset                                  # Treat unset variables as an error
+#set -o nounset                                  # Treat unset variables as an error
 
+#GLOBAL VARIABLES
 have_f=0
 have_l=0
 have_e=0
 
-#calls program 1 to retrieve files
-systemCalls1()
+#START PROGRAM MESSAGES
+echo "STARTING MAIN"
+echo >> log
+echo "STARTING MAIN" >> log
+
+
+
+
+#SYSTEM CALLS
+##################################
+#calls program 1
+#loops over years and passes in values to retreivefile.sh
+systemCall1()
 {
-    echo "Calls program 1"
-    #for (int i = firstYear)
+    while [[ $firstYear -le $lastYear ]]
+    do
+        sh ./retrieveFile.sh $firstYear &>> log
+        firstYear=$((firstYear+1))
+    done
 }
 #calls program 2 to expand files downloaded
-systemCalls2()
+systemCall2()
 {
-    echo "Calls program 2"
+sh ./expandFile.sh
 }
 #calls program 3 to filter data
-systemCalls3()
+systemCall3()
 {
-    echo "Calls program 3"
+sh ./parseFile.sh
 }
 #calls program 4 to compress data
-systemCalls4()
+systemCall4()
 {
-    echo "Calls program 4"
+sh ./compressFile.sh
 }
 #calls program 5 to FTP file to server
-systemCalls5()
+systemCall5()
 {
-    echo "Calls program 5"
+    sh ./ftpFile $user $passwd
 }
+#Calls program 6 to rm temp file directory
+systemCall6()
+{
+    sh ./cleanFile.sh
+}
+##################################
 
-
+#HELP FUNCTION
 helpFunc()
 {
     echo "Usage: $0 [-f first year] [-l last year] [-e email] [-u user] [-p passwd]"
-    echo "Both arguments are required"
+    echo "First Year, Last Year and Email are required."
     exit 1
 }
 
 
+
+
+#OPT ARGUMENTS
 while getopts ":f:l:e:u:p" opt
 do
     case $opt in
-       f)have_f=1
+       f)
+           have_f=1
            firstYear=$OPTARG
            ;;
-        l)have_l=1
+        l)
+            have_l=1
             lastYear=$OPTARG
             ;;
-        e)have_e=1
+        e)
+            have_e=1
             email=$OPTARG
             ;;
-        u) user=$OPTARG
+        u)
+            user=$OPTARG
             ;;
-        p) passwd=$OPTARG
+        p)
+            passwd=$OPTARG
             ;;
-        ?) helpFunc
+        ?)
+            helpFunc
             ;;
-        *) helpFunc
+        *)
+            helpFunc
             ;;
     esac
 done
 
-if [[ $have_f -eq 1 && $have_l -eq 1 && $have_e -eq 1 ]]
+#CHECK FOR REQUIRED ARGUMENTS
+if [[ $have_f -eq 0 || $have_l -eq 0 || $have_e -eq 0 ]]
 then
-    echo "Have required information"
-    systemCalls1
-else
     helpFunc
 fi
 
+#RUN MAIN PROGRAM
+systemCall1
+systemCall2
+systemCall3
+systemCall4
+systemCall5
+systemCall6
+#mail
+ip=`hostname -I`
+`mail -s "SUCCESS" $email <<< "Successfully transferred file to FTP $ip Server"`
+#redirect
+month=`date +%m`
+year=`date +%Y-%m-%d`
+`mv $HOME/log/$month/finalProject_$year.log`
+
+
+#END OF PROGRAM
+echo >> log
+echo "END OF PROGRAM" >> log
+echo "DONE"
 exit 0

@@ -26,7 +26,10 @@ echo "PROGRAM 1:" >> log
 #wget retreives file based on the YEAR input paramater
 #redirects stdout and error out to a log using "command &> file"
 # "&>>" will append where as "&>" will overwrite
-echo "Retrieving Web File" >> log
+if [[ ! -e MOCK_DATA_$year.tar.gz ]]
+then
+    echo "Retrieving Web File" >> log
 `wget http://icarus.cs.weber.edu/~hvalle/cs3030/MOCK_DATA_$year.tar.gz &>> log`
+fi
 
 exit 0

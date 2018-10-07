@@ -22,7 +22,7 @@ set -o nounset                                  # Treat unset variables as an er
 #compress final filter data file
 
 #fileName being passed in
-fileName=$1
+fileName="/temp/canadianFemales.csv"
 
 #timestamp (YYYY-MM-DD-HH)
 timestamp=`date +%Y-%m-%d:%M`

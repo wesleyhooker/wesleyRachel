@@ -131,6 +131,8 @@ ip=`hostname -I`
 `mail -s "SUCCESS" $email <<< "Successfully transferred file to FTP $ip Server"`
 #redirect
 month=`date +%m`
+`mkdir $HOME/log` #creates directory for log
+`mkdir $HOME/log/$month` #creates directory for month
 year=`date +%Y-%m-%d`
 `mv $HOME/log/$month/finalProject_$year.log`
 

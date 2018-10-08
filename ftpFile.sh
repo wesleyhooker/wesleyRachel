@@ -18,7 +18,7 @@
 #===============================================================================
 
 set -o nounset                                  # Treat unset variables as an error
-
+#will work if there is /temp/candianFemales.csv
 #log
 #echo"PROGRAM 5:" >>log
 
@@ -30,6 +30,7 @@ fileDirectory="/home/wsu007/ftp/files/"
 host="137.190.19.85"
 
     cp $fileName $fileDirectory
+    q
 
     #automatically sends through ftp
  # ftp -n $host <<END_SCRIPT
@@ -46,7 +47,7 @@ host="137.190.19.85"
 ftp -inv $host <<EOF
     user $user $passwd
     cd files/
-    get $fileName
+    put $fileName
     bye
 EOF
    

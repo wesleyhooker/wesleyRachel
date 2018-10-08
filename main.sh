@@ -144,10 +144,21 @@ ip=`hostname -I`
 `mail -s "SUCCESS" $email <<< "Successfully transferred file to FTP $ip Server"`
 #redirect
 month=`date +%m`
-`mkdir $HOME/log` #creates directory for log
-`mkdir $HOME/log/$month` #creates directory for month
+logDirectory="$HOME/log"
+
+#checks if directory exists
+
+if [[ ! -d $logDirectory ]]
+then
+    echo "Log directory $logDirectory is missing"
+    echo "Create folder"
+
+    `mkdir $HOME/log` #creates directory for log
+    `mkdir $HOME/log/$month` #creates directory for month
+fi
+
 year=`date +%Y-%m-%d`
-`mv $HOME/log/$month/finalProject_$year.log`
+`mv log  $HOME/log/$month/finalProject_$year.log`
 
 
 #END OF PROGRAM

@@ -40,6 +40,6 @@ done
 #print the first name, lastname, email.
 #file to be printed located in temp/MOCK_DATA
 #Send awked cust info to temp/info.csv
-echo "Retrieving first, last and email" >> log
-`awk -F',' '{ print $2", "$3", "$4 }' temp/MOCK_DATA*.csv > temp/info.csv`
+#echo "Retrieving first, last and email" >> log
+#`awk -F',' '{ print $2", "$3", "$4 }' temp/MOCK_DATA*.csv > temp/info.csv`
 exit 0

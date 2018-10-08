@@ -21,15 +21,15 @@ set -o nounset                                  # Treat unset variables as an er
 
 year=$1
 
-echo "PROGRAM 1:" >> log
+echo "PROGRAM 1: $year" >> log
 
 #wget retreives file based on the YEAR input paramater
 #redirects stdout and error out to a log using "command &> file"
 # "&>>" will append where as "&>" will overwrite
-if [[ ! -e MOCK_DATA_$year.tar.gz ]]
+if [[ ! -f MOCK_DATA_$year.tar.gz ]]
 then
-    echo "Retrieving Web File" >> log
-`wget http://icarus.cs.weber.edu/~hvalle/cs3030/MOCK_DATA_$year.tar.gz &>> log`
+    echo "Retrieving Web File: MOCK_DATA_$year.tar.gz" >> log
+`wget "http://icarus.cs.weber.edu/~hvalle/cs3030/MOCK_DATA_$year.tar.gz" >> log`
 fi
 
 exit 0

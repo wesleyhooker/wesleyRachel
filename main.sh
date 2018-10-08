@@ -38,10 +38,10 @@ echo "STARTING MAIN" >> log
 #loops over years and passes in values to retreivefile.sh
 systemCall1()
 {
-    while [[ $firstYear -le $lastYear ]]
+   while [[ $firstYear -le $lastYear ]]
     do
-        sh ./retrieveFile.sh $firstYear &>> log
-        firstYear=$((firstYear+1))
+       ./retrieveFile.sh $firstYear 
+       ((firstYear++))
     done
 }
 #calls program 2 to expand files downloaded
@@ -104,9 +104,9 @@ do
         p)
             passwd=$OPTARG
             ;;
-        ?)
-            helpFunc
-            ;;
+        #?)
+           # helpFunc
+           # ;;
         *)
             helpFunc
             ;;
@@ -120,12 +120,25 @@ then
 fi
 
 #RUN MAIN PROGRAM
-systemCall1
-systemCall2
-systemCall3
-systemCall4
-systemCall5
-systemCall6
+echo
+echo "PROGRAM 1"
+systemCall1 &>> log
+echo
+echo "PROGRAM 2"
+systemCall2 &>> log
+echo
+echo "PROGRAM 3"
+systemCall3 &>> log
+echo
+echo "PROGRAM 4"
+systemCall4 &>> log
+echo
+echo "PROGRAM 5"
+systemCall5 &>> log
+echo
+echo "PROGRAM 6"
+systemCall6 &>> log
+echo
 #mail
 ip=`hostname -I`
 `mail -s "SUCCESS" $email <<< "Successfully transferred file to FTP $ip Server"`

@@ -57,7 +57,7 @@ sh ./parseFile.sh
 #calls program 4 to compress data
 systemCall4()
 {
-sh ./compressFile.sh
+./compressFile.sh
 }
 #calls program 5 to FTP file to server
 systemCall5()
@@ -126,6 +126,7 @@ systemCall1 &>> log
 echo
 echo "PROGRAM 2"
 systemCall2 &>> log
+sleep 1
 echo
 echo "PROGRAM 3"
 systemCall3 &>> log
@@ -157,12 +158,13 @@ then
     `mkdir $HOME/log/$month` #creates directory for month
 fi
 
+echo >> log
+echo "END OF PROGRAM" >> log
+
 year=`date +%Y-%m-%d`
 `mv log  $HOME/log/$month/finalProject_$year.log`
 
 
 #END OF PROGRAM
-echo >> log
-echo "END OF PROGRAM" >> log
 echo "DONE"
 exit 0

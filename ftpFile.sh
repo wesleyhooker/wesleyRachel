@@ -26,7 +26,7 @@ set -o nounset                                  # Treat unset variables as an er
 user=$1
 passwd=$2
 fileName="temp/canadianFemales.csv"
-fileDirectory="/home/wsu007/ftp/files/"
+fileDirectory="$HOME/ftp/files/"
 host="137.190.19.85"
 
     cp $fileName $fileDirectory

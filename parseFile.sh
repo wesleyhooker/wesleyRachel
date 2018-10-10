@@ -32,3 +32,4 @@ echo "PROGRAM 3:" >> log
 echo "Finding and replacing empty email values" >> log
 echo "Printing canadian females to output file \"canadianFemales.csv\"" >> log
 `awk -F',' '{if($4 == ""){$4="waldo@weber.edu"}if($5 == "Female" && $6 == "Canada"){print $2", "$3", "$4} }' temp/MOCK_DATA*.csv > temp/canadianFemales.csv`
+echo >> log

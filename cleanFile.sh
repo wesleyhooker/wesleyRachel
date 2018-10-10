@@ -19,6 +19,7 @@
 
 set -o nounset                                  # Treat unset variables as an error
 #Delete temp folder from program 2
+echo >> log
 echo "PROGRAM 6:" >>log
 
 echo "Cleaning temporary files">>log

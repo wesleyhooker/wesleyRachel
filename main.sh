@@ -23,6 +23,10 @@
 have_f=0
 have_l=0
 have_e=0
+ip=`hostname -I`
+month=`date +%m`
+logDirectory="$HOME/log"
+
 
 #START PROGRAM MESSAGES
 echo "STARTING MAIN"
@@ -79,6 +83,13 @@ helpFunc()
     exit 1
 }
 
+checkError()
+{
+    if [[ $? -ne 0 ]]
+    then
+        `mail -s "Error" $email <<< "Error transfering file to FTP $ip Server"`
+    fi
+}
 
 
 
@@ -126,30 +137,36 @@ systemCall1 &>> log
 echo
 echo "PROGRAM 2"
 systemCall2 &>> log
+checkError
 sleep 1
 echo
 echo "PROGRAM 3"
 systemCall3 &>> log
+checkError
 echo
 echo "PROGRAM 4"
 systemCall4 &>> log
+checkError
 echo
 echo "PROGRAM 5"
 systemCall5 &>> log
+checkError
 echo
 echo "PROGRAM 6"
 systemCall6 &>> log
+checkError
 echo
-#mail
-ip=`hostname -I`
-#`echo "Successfully transferred file to FTP $ip Server" | mail -s "Success" $email`
-`mail -s "SUCCESS" $email <<< "Successfully transferred file to FTP $ip Server"`
-#redirect
-month=`date +%m`
-logDirectory="$HOME/log"
+echo $?
 
-#checks if directory exists
+#MAIL ON SUCCESS
+if [[ $? -eq 0 ]]
+then
+    `mail -s "SUCCESS" $email <<< "Successfully transferred file to FTP $ip Server"`
+else
+    `mail -s "Error" $email <<< "Error transfering file to FTP $ip Server"`
+fi
 
+#CHECKS IF TARGET DIRECTORY FOR LOG EXISTS
 if [[ ! -d $logDirectory ]]
 then
     echo "Log directory $logDirectory is missing"
@@ -158,13 +175,12 @@ then
     `mkdir $HOME/log` #creates directory for log
     `mkdir $HOME/log/$month` #creates directory for month
 fi
-
 echo >> log
 echo "END OF PROGRAM" >> log
 
+#MOVES LOG TO TARGET DIRECTORY
 year=`date +%Y-%m-%d`
 `mv log  $HOME/log/$month/finalProject_$year.log`
-
 
 #END OF PROGRAM
 echo "DONE"

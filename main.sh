@@ -62,7 +62,7 @@ systemCall4()
 #calls program 5 to FTP file to server
 systemCall5()
 {
-    sh ./ftpFile $user $passwd
+    sh ./ftpFile.sh $user $passwd
 }
 #Calls program 6 to rm temp file directory
 systemCall6()
@@ -83,7 +83,7 @@ helpFunc()
 
 
 #OPT ARGUMENTS
-while getopts ":f:l:e:u:p" opt
+while getopts ":f:l:e:u:p:" opt
 do
     case $opt in
        f)
@@ -142,6 +142,7 @@ systemCall6 &>> log
 echo
 #mail
 ip=`hostname -I`
+#`echo "Successfully transferred file to FTP $ip Server" | mail -s "Success" $email`
 `mail -s "SUCCESS" $email <<< "Successfully transferred file to FTP $ip Server"`
 #redirect
 month=`date +%m`

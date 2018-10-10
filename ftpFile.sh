@@ -25,12 +25,11 @@ set -o nounset                                  # Treat unset variables as an er
 #variables from main.sh
 user=$1
 passwd=$2
-fileName="/temp/canadianFemales.csv"
+fileName="temp/canadianFemales.csv"
 fileDirectory="/home/wsu007/ftp/files/"
 host="137.190.19.85"
 
     cp $fileName $fileDirectory
-    q
 
     #automatically sends through ftp
  # ftp -n $host <<END_SCRIPT

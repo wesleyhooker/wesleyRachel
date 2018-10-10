@@ -22,7 +22,7 @@ set -o nounset                                  # Treat unset variables as an er
 #compress final filter data file
 
 #fileName being passed in
-fileName="/temp/canadianFemales.csv"
+fileName="temp/canadianFemales.csv"
 
 #timestamp (YYYY-MM-DD-HH)
 timestamp=`date +%Y-%m-%d:%M`
@@ -33,3 +33,4 @@ echo "PROGRAM: 4" >> log
 
 `zip wesleyRachel_DATA_FILTER_$timestamp.zip $fileName &>> log`
 
+echo >> log

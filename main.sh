@@ -184,4 +184,6 @@ year=`date +%Y-%m-%d`
 
 #END OF PROGRAM
 echo "DONE"
+today= `date`
+echo"Today is my the date and time $today" >> log
 exit 0

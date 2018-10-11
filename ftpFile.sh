@@ -31,18 +31,6 @@ host="137.190.19.85"
 
     cp $fileName $fileDirectory
 
-    #automatically sends through ftp
- # ftp -n $host <<END_SCRIPT
-   # quote USER $user 
-   # quote PASS $passwd
-   # bin
-   # cd files
-   # put $fileName
-   # get $fileName
-   # quit
-
-#END_SCRIPT
-
 ftp -inv $host <<EOF
     user $user $passwd
     cd files/

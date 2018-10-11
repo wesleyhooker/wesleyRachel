@@ -1,0 +1,5 @@
+
+#Every 6 hours, from 8am to 5pm Monday through friday
+#then grabs main.sh from file location and puts in in the log file that is from the log of the program
+#m h dom mon dow command
+0 8-17/6 * * 1-5 /home/wsu007/cs3030Fall18/wesleyRachel/main.sh 2>&1 >> /home/wsu007/log/10/finalProject_2018-10-11.log

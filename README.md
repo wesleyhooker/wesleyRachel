@@ -21,13 +21,20 @@ ParseFile
     canadianFemales.csv inside of the temp folder.
 
 CompressFile
-    
+    This shell creates a zip file from the previously parsed files named canadianFemales.csv.
+    It renames it to wesleyRachel_DATA_FILTER_$timestamp.zip
 
+    Usage: ./compressFile.sh
 ftpFile
+    This shell copies the filename to the ftp files folder.
+    It then connects through ftp to the other host and signs in automatically therefore
+    transferring the file.
 
-
+    Usage: ./ftpFile [User] [Passwd]
 cleanFile
+    This shell removes the temp file as well as anything in it.
 
+    Usage: ./cleanFile.sh
 
 main
     This is the main shell. Pass in the correct arguments and it will call 
